@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { Equipment } from '@/types/Equipment';
+import type { Product } from '@/types/Product';
 
 interface CartStore {
-    items: Equipment[];
-    addItem: (item: Equipment) => void;
-    removeItem: (item: Equipment) => void;
+    items: Array<Product>;
+    addItem: (item: Product) => void;
+    removeItem: (item: Product) => void;
     clearItems: () => void;
 }
 

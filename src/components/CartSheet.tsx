@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/sheet';
 
 import { FaShoppingCart } from 'react-icons/fa';
+import { Button } from './ui/button';
 
 export default function CartSheet() {
     const items = useCartStore((state) => state.items);
@@ -17,16 +18,19 @@ export default function CartSheet() {
     return (
         <Sheet>
             <SheetTrigger>
-                <FaShoppingCart />
+                <Button variant="ghost" size="icon">
+                    <FaShoppingCart />
+                </Button>
             </SheetTrigger>
-            <SheetContent className="bg-gradient-blueish-gray text-white border-l-2">
+            <SheetContent>
                 <SheetHeader>
                     <SheetTitle>Cart</SheetTitle>
                 </SheetHeader>
+
                 <ul>
                     {items.map((item) => (
-                        <li key={item.name} className="flex justify-between">
-                            <span>{item.name}</span>
+                        <li key={item.title} className="flex justify-between">
+                            <span>{item.title}</span>
                             <button onClick={() => removeItem(item)}>
                                 Remove
                             </button>
