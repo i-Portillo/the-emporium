@@ -7,8 +7,8 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet';
 
-import { FaShoppingCart } from 'react-icons/fa';
 import { Button } from './ui/button';
+import { ShoppingCart } from 'lucide-react';
 
 export default function CartSheet() {
     const items = useCartStore((state) => state.items);
@@ -19,7 +19,7 @@ export default function CartSheet() {
         <Sheet>
             <SheetTrigger>
                 <Button variant="ghost" size="icon">
-                    <FaShoppingCart />
+                    <ShoppingCart />
                 </Button>
             </SheetTrigger>
             <SheetContent>
@@ -29,8 +29,8 @@ export default function CartSheet() {
 
                 <ul>
                     {items.map((item) => (
-                        <li key={item.title} className="flex justify-between">
-                            <span>{item.title}</span>
+                        <li key={item.name} className="flex justify-between">
+                            <span>{item.name}</span>
                             <button onClick={() => removeItem(item)}>
                                 Remove
                             </button>
