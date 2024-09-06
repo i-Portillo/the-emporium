@@ -1,7 +1,7 @@
 import './App.css';
 
 import TopBar from './components/TopBar';
-import ProductTable from './components/ProductTable';
+import Shops from './components/Shops';
 
 function App() {
     return (
@@ -10,7 +10,7 @@ function App() {
                 <TopBar />
             </header>
             <main className="flex flex-col">
-                <ProductTable />
+                <Shops />
             </main>
         </>
     );

@@ -12,22 +12,45 @@ import { Product } from '@/types/Product';
 export default function ProductDetails({ product }: { product: Product }) {
     translate.engine = 'google';
 
-    const [desc, setDesc] = useState(product.summary);
+    const [desc, setDesc] = useState(product.description);
+    const [translated, setTranslated] = useState(false);
+
+    // Give me a function that gets html as string as input and returns a parsed html
+    // code as output
+    const parseHtml = (html: string) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const div = doc.createElement('div');
+        div.innerHTML = doc.body.innerHTML;
+        return div as HTMLElement;
+    };
 
     return (
         <DialogContent>
-            <DialogHeader>
+            <DialogHeader className="flex flex-row items-center justify-between">
                 <DialogTitle>{product.name}</DialogTitle>
+                <Button
+                    onClick={async () => {
+                        if (!translated) {
+                            setDesc(await translate(product.description, 'es'));
+                        } else {
+                            setDesc(product.description);
+                        }
+                        setTranslated((prev) => !prev);
+                    }}
+                    size={'icon'}
+                    variant={'ghost'}
+                >
+                    {translated ? '🇬🇧' : '🇪🇸'}
+                </Button>
             </DialogHeader>
-            <Button
-                onClick={async () =>
-                    setDesc(await translate(product.summary, 'es'))
-                }
-                disabled={desc !== product.summary}
-            >
-                Translate
-            </Button>
-            <DialogDescription>{desc}</DialogDescription>
+            <DialogDescription>
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: parseHtml(desc).innerHTML,
+                    }}
+                />
+            </DialogDescription>
         </DialogContent>
     );
 }
