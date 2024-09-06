@@ -7,8 +7,9 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import translate from 'translate';
+import { Product } from '@/types/Product';
 
-export default function ProductDetails({ product }) {
+export default function ProductDetails({ product }: { product: Product }) {
     translate.engine = 'google';
 
     const [desc, setDesc] = useState(product.summary);
